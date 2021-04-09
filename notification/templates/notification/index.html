@@ -1,0 +1,41 @@
+{% extends 'notification/base.html' %}
+{% block content %}
+
+      <script>
+
+
+        console.log(Notification.permission);
+        // if(Notification.permission == 'granted'){
+        //   showNotificaiton();
+        // }
+        // else if(Notification.permission !== 'denied') {
+        //       Notification.requestPermission().then(permission=>{
+        //         console.log(permission);
+        //         if(permission=='granted'){
+        //           showNotificaiton();
+        //         }
+                
+        //       });
+
+        // }
+
+        function showNotificaiton(e){
+          const notification = new Notification("New Notification",{
+            body:e
+          });
+        }
+
+      </script>
+
+      <script>
+        var socket = new WebSocket('ws://localhost:8000/ws/notifications/');
+        socket.onmessage = function(event){
+          var text = JSON.parse(event.data);
+          console.log(text);
+          showNotificaiton(text.NotificationNumber);
+        }
+      </script>
+
+{% endblock %}
+
+      
