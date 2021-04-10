@@ -17,12 +17,12 @@
           var text = JSON.parse(event.data);
           console.log(text);
           
-        console.log(Notification.permission);
+        //console.log(Notification.permission);
         if(Notification.permission == "granted"){
           showNotificaiton(text.NotificationNumber);
         }
 
-        else if (Notification.permission == "denied"){
+        else if (Notification.permission !== "denied"){
               Notification.requestPermission().then(permission => {
 
                 console.log(permission);
